@@ -36,6 +36,10 @@ test('Remaining ampersand', function () {
 		}
 	});
 });
+test('Invalid encoding', function() {
+	deparam('foo=%0g');
+	ok(true, 'Did not throw');
+})
 /** /
 test("deparam an array", function(){
 var data = deparam("a[0]=1&a[1]=2");
