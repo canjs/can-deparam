@@ -22,7 +22,21 @@ var digitTest = /^\d+$/,
 	keyBreaker = /([^\[\]]+)|(\[\])/g,
 	paramTest = /([^?#]*)(#.*)?$/,
 	prep = function (str) {
-		return decodeURIComponent(str.replace(/\+/g, ' '));
+		str = str.replace(/\+/g, ' ');
+
+		try {
+			return decodeURIComponent(str);
+		}
+		catch (e) {
+			return str.replace(/%(.{2})/, function(match, hex) {
+				try {
+					return decodeURIComponent(match);
+				}
+				catch (e) {
+					return match;
+				}
+			});
+		}
 	};
 module.exports = namespace.deparam = function (params) {
 	var data = {}, pairs, lastPart;
