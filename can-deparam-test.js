@@ -36,6 +36,12 @@ test('Remaining ampersand', function () {
 		}
 	});
 });
+test('Invalid encoding', function() {
+	var data = deparam('foo=%0g');
+	deepEqual(data, {
+		foo: '%0g'
+	});
+});
 /** /
 test("deparam an array", function(){
 var data = deparam("a[0]=1&a[1]=2");

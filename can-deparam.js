@@ -21,8 +21,18 @@ var namespace = require("can-namespace");
 var digitTest = /^\d+$/,
 	keyBreaker = /([^\[\]]+)|(\[\])/g,
 	paramTest = /([^?#]*)(#.*)?$/,
+	entityRegex = /%([^0-9a-f][0-9a-f]|[0-9a-f][^0-9a-f]|[^0-9a-f][^0-9a-f])/i,
 	prep = function (str) {
-		return decodeURIComponent(str.replace(/\+/g, ' '));
+		str = str.replace(/\+/g, ' ');
+
+		try {
+			return decodeURIComponent(str);
+		}
+		catch (e) {
+			return decodeURIComponent(str.replace(entityRegex, function(match, hex) {
+				return '%25' + hex;
+			}));
+		}
 	};
 module.exports = namespace.deparam = function (params) {
 	var data = {}, pairs, lastPart;
