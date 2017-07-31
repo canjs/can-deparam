@@ -1,54 +1,24 @@
 # can-deparam
 
-[![Build Status](https://travis-ci.org/canjs/can-deparam.png?branch=master)](https://travis-ci.org/canjs/can-deparam)
+[![Join the chat at https://gitter.im/canjs/canjs](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/canjs/canjs?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/canjs/can-deparam/blob/master/LICENSE.md)
+[![npm version](https://badge.fury.io/js/can-deparam.svg)](https://www.npmjs.com/package/can-deparam)
+[![Travis build status](https://travis-ci.org/canjs/can-deparam.svg?branch=master)](https://travis-ci.org/canjs/can-deparam)
 
 Deserialize a query string into an array or object.
 
-## Usage
+## Documentation
 
-### ES6 use
+Read the [API docs on CanJS.com](https://canjs.com/doc/can-deparam.html).
 
-With StealJS, you can import this module directly in a template that is autorendered:
+## Changelog
 
-```js
-import plugin from 'can-deparam';
-```
+See the [latest releases on GitHub](https://github.com/canjs/can-deparam/releases).
 
-### CommonJS use
+## Contributing
 
-Use `require` to load `can-deparam` and everything else
-needed to create a template that uses `can-deparam`:
+The [contribution guide](https://github.com/canjs/can-deparam/blob/master/CONTRIBUTING.md) has information on getting help, reporting bugs, developing locally, and more.
 
-```js
-var plugin = require("can-deparam");
-```
+## License
 
-## AMD use
-
-Configure the `can` and `jquery` paths and the `can-deparam` package:
-
-```html
-<script src="require.js"></script>
-<script>
-	require.config({
-	    paths: {
-	        "jquery": "node_modules/jquery/dist/jquery",
-	        "can": "node_modules/canjs/dist/amd/can"
-	    },
-	    packages: [{
-		    	name: 'can-deparam',
-		    	location: 'node_modules/can-deparam/dist/amd',
-		    	main: 'lib/can-deparam'
-	    }]
-	});
-	require(["main-amd"], function(){});
-</script>
-```
-
-### Standalone use
-
-Load the `global` version of the plugin:
-
-```html
-<script src='./node_modules/can-deparam/dist/global/can-deparam.js'></script>
-```
+[MIT](https://github.com/canjs/can-deparam/blob/master/LICENSE.md)

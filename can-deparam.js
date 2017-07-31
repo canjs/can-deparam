@@ -18,6 +18,14 @@ var namespace = require("can-namespace");
  * console.log(JSON.stringify(deparam("#foo[]=bar&foo[]=baz"))); // -> '{"foo" : ["bar", "baz"]}'
  * console.log(JSON.stringify(deparam("foo=bar%20%26%20baz"))); // -> '{"foo" : "bar & baz"}'
  * ```
+ * @body
+ *
+ * ## Try it
+ *
+ * Use this JS Bin to play around with this package:
+ *
+ * <a class="jsbin-embed" href="https://jsbin.com/mobimok/3/embed?js,console">can-deparam on jsbin.com</a>
+ * <script src="https://static.jsbin.com/js/embed.min.js?4.0.4"></script>
  */
 var digitTest = /^\d+$/,
 	keyBreaker = /([^\[\]]+)|(\[\])/g,

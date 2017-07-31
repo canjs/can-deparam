@@ -1,5 +1,16 @@
 # Contributing to can-deparam
 
+Check out the [contribution guide on CanJS.com](https://canjs.com/doc/guides/contribute.html) for information on:
+
+- [Code of Conduct](https://canjs.com/doc/guides/contribute.html#CodeofConduct)
+- [Getting Help](https://canjs.com/doc/guides/contribute.html#GettingHelp)
+- [Project Organization](https://canjs.com/doc/guides/contributing/project-organization.html)
+- [Reporting Bugs](https://canjs.com/doc/guides/contributing/bug-report.html)
+- [Suggesting Features](https://canjs.com/doc/guides/contributing/feature-suggestion.html)
+- [Finding Ways to Contribute](https://canjs.com/doc/guides/contributing/finding-ways-to-contribute.html)
+
+The rest of this guide has information that’s specific to this repository.
+
 ## Developing Locally
 
 This section will walk you through setting up the [repository](https://github.com/canjs/can-deparam) on your computer.
@@ -71,15 +82,3 @@ npm run build
 ```
 
 This will create a `dist/` folder that contains the AMD, CommonJS, and global module versions of the project.
-
-### Building the documentation
-
-To generate the docs:
-
-```shell
-npm run document
-```
-
-This will create a `docs/` folder that contains a browsable site with all of your documentation.
-
-With the dev server running, you can view the docs at http://localhost:8080/docs/
