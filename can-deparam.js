@@ -2,8 +2,10 @@ var namespace = require("can-namespace");
 
 /**
  * @module {function} can-deparam can-deparam
- * @parent can-infrastructure
+ * @parent can-routing
+ * @collection can-infrastructure
  * @package ./package.json
+ * @description Deserialize a query string into an array or object.
  * @signature `deparam(params)`
  *
  * @param {String} params a form-urlencoded string of key-value pairs
