@@ -2,7 +2,8 @@ var namespace = require("can-namespace");
 
 /**
  * @module {function} can-deparam can-deparam
- * @parent can-infrastructure
+ * @parent can-routing
+ * @collection can-infrastructure
  * @package ./package.json
  * @signature `deparam(params)`
  *
