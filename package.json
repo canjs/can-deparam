@@ -1,6 +1,6 @@
 {
   "name": "can-deparam",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Deserialize a query string into an array or object.",
   "homepage": "https://canjs.com/",
   "repository": {
