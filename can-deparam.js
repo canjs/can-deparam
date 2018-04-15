@@ -8,7 +8,14 @@ var namespace = require("can-namespace");
  * @description Deserialize a query string into an array or object.
  * @signature `deparam(params)`
  *
- * @param {String} params a form-urlencoded string of key-value pairs
+ * @param {String} params A form-urlencoded string of key-value pairs.
+ * @param {function} [valueDeserializer] A function that decodes the string values. For example, using
+ * [can-string-to-any] will convert `"null"` to `null` like:
+ *
+ *   ```js
+ *   import stringToAny from "can-string-to-any";
+ *   deparam("value=null", stringToAny) //-> {value: null}
+ *   ```
  * @return {Object} The params formatted into an object
  *
  * Takes a string of name value pairs and returns a Object literal that represents those params.
@@ -45,7 +52,16 @@ var digitTest = /^\d+$/,
 			}));
 		}
 	};
-module.exports = namespace.deparam = function (params) {
+
+function isArrayLikeName(name) {
+	return digitTest.test(name) || name === '[]';
+}
+
+
+function idenity(value){ return value; }
+
+module.exports = namespace.deparam = function (params, valueDeserializer) {
+	valueDeserializer = valueDeserializer || idenity;
 	var data = {}, pairs, lastPart;
 	if (params && paramTest.test(params)) {
 		pairs = params.split('&');
@@ -57,17 +73,30 @@ module.exports = namespace.deparam = function (params) {
 			if (key) {
 				parts = key.match(keyBreaker);
 				for (var j = 0, l = parts.length - 1; j < l; j++) {
-					if (!current[parts[j]]) {
-						// If what we are pointing to looks like an `array`
-						current[parts[j]] = digitTest.test(parts[j + 1]) || parts[j + 1] === '[]' ? [] : {};
+					var currentName = parts[j],
+						nextName = parts[j + 1],
+						currentIsArray = isArrayLikeName(currentName) && current instanceof Array;
+					if (!current[currentName]) {
+						if(currentIsArray) {
+							current.push( isArrayLikeName(nextName) ? [] : {} );
+						} else {
+							// If what we are pointing to looks like an `array`
+							current[currentName] = isArrayLikeName(nextName) ? [] : {};
+						}
+
 					}
-					current = current[parts[j]];
+					if(currentIsArray) {
+						current = current[current.length - 1];
+					} else {
+						current = current[currentName];
+					}
+
 				}
 				lastPart = parts.pop();
-				if (lastPart === '[]') {
-					current.push(value);
+				if ( isArrayLikeName(lastPart) ) {
+					current.push(valueDeserializer(value));
 				} else {
-					current[lastPart] = value;
+					current[lastPart] = valueDeserializer(value);
 				}
 			}
 		});

@@ -1,7 +1,8 @@
 var deparam = require('./can-deparam');
 var QUnit = require('steal-qunit');
+var stringToAny = require("can-string-to-any");
 
-QUnit.module('can/util/string/deparam');
+QUnit.module('can-deparam');
 /** /
 test("Basic deparam",function(){
 
@@ -42,6 +43,40 @@ test('Invalid encoding', function() {
 		foo: '%0g'
 	});
 });
+
+QUnit.test("deparam deep", function(){
+	QUnit.deepEqual(deparam("age[or][][lte]=5&age[or][]=null"), {
+		age: {
+			or: [ {lte: "5"}, "null" ]
+		}
+	});
+	/*
+	QUnit.deepEqual(param({
+		"undefined": undefined,
+		"null": null,
+		"NaN": NaN,
+		"true": true,
+		"false": false
+	}),"undefined=undefined&null=null&NaN=NaN&true=true&false=false","true, false, undefined, etc");*/
+});
+
+QUnit.test("takes value deserializer", function(){
+	QUnit.deepEqual(deparam("age[or][][lte]=5&age[or][]=null", stringToAny), {
+		age: {
+			or: [ {lte: 5}, null ]
+		}
+	});
+
+	QUnit.deepEqual(deparam("undefined=undefined&null=null&NaN=NaN&true=true&false=false", stringToAny), {
+		"undefined": undefined,
+		"null": null,
+		"NaN": NaN,
+		"true": true,
+		"false": false
+	});
+});
+
+
 /** /
 test("deparam an array", function(){
 var data = deparam("a[0]=1&a[1]=2");
