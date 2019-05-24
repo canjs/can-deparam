@@ -14,44 +14,44 @@ equal(data.a,"b")
 equal(data.c,"d")
 })
 /**/
-test('Nested deparam', function () {
+QUnit.test('Nested deparam', function(assert) {
 	var data = deparam('a[b]=1&a[c]=2');
-	equal(data.a.b, 1);
-	equal(data.a.c, 2);
+	assert.equal(data.a.b, 1);
+	assert.equal(data.a.c, 2);
 	data = deparam('a[]=1&a[]=2');
-	equal(data.a[0], 1);
-	equal(data.a[1], 2);
+	assert.equal(data.a[0], 1);
+	assert.equal(data.a[1], 2);
 	data = deparam('a[b][]=1&a[b][]=2');
-	equal(data.a.b[0], 1);
-	equal(data.a.b[1], 2);
+	assert.equal(data.a.b[0], 1);
+	assert.equal(data.a.b[1], 2);
 	data = deparam('a[0]=1&a[1]=2');
-	equal(data.a[0], 1);
-	equal(data.a[1], 2);
+	assert.equal(data.a[0], 1);
+	assert.equal(data.a[1], 2);
 });
-test('Remaining ampersand', function () {
+QUnit.test('Remaining ampersand', function(assert) {
 	var data = deparam('a[b]=1&a[c]=2&');
-	deepEqual(data, {
+	assert.deepEqual(data, {
 		a: {
 			b: '1',
 			c: '2'
 		}
 	});
 });
-test('Invalid encoding', function() {
+QUnit.test('Invalid encoding', function(assert) {
 	var data = deparam('foo=%0g');
-	deepEqual(data, {
+	assert.deepEqual(data, {
 		foo: '%0g'
 	});
 });
 
-QUnit.test("deparam deep", function(){
-	QUnit.deepEqual(deparam("age[or][][lte]=5&age[or][]=null"), {
+QUnit.test("deparam deep", function(assert) {
+	assert.deepEqual(deparam("age[or][][lte]=5&age[or][]=null"), {
 		age: {
 			or: [ {lte: "5"}, "null" ]
 		}
 	});
 	/*
-	QUnit.deepEqual(param({
+	assert.deepEqual(param({
 		"undefined": undefined,
 		"null": null,
 		"NaN": NaN,
@@ -60,14 +60,14 @@ QUnit.test("deparam deep", function(){
 	}),"undefined=undefined&null=null&NaN=NaN&true=true&false=false","true, false, undefined, etc");*/
 });
 
-QUnit.test("takes value deserializer", function(){
-	QUnit.deepEqual(deparam("age[or][][lte]=5&age[or][]=null", stringToAny), {
+QUnit.test("takes value deserializer", function(assert) {
+	assert.deepEqual(deparam("age[or][][lte]=5&age[or][]=null", stringToAny), {
 		age: {
 			or: [ {lte: 5}, null ]
 		}
 	});
 
-	QUnit.deepEqual(deparam("undefined=undefined&null=null&NaN=NaN&true=true&false=false", stringToAny), {
+	assert.deepEqual(deparam("undefined=undefined&null=null&NaN=NaN&true=true&false=false", stringToAny), {
 		"undefined": undefined,
 		"null": null,
 		"NaN": NaN,
