@@ -76,6 +76,13 @@ QUnit.test("takes value deserializer", function(assert) {
 	});
 });
 
+QUnit.test(" handle '?' and '#' ", function(assert) {
+	var result = deparam("?foo=bar&number=1234", stringToAny);
+	assert.deepEqual(result, {"foo" : "bar", "number": 1234});
+	result = deparam("#foo[]=bar&foo[]=baz");
+	assert.deepEqual(result, {"foo" : ["bar", "baz"]});
+});
+
 
 /** /
 test("deparam an array", function(){

@@ -42,6 +42,9 @@ var digitTest = /^\d+$/,
 	paramTest = /([^?#]*)(#.*)?$/,
 	entityRegex = /%([^0-9a-f][0-9a-f]|[0-9a-f][^0-9a-f]|[^0-9a-f][^0-9a-f])/i,
 	prep = function (str) {
+		if (str.charAt(0) === "#" || str.charAt(0) === "?") {
+			str = str.substr(1, str.length);
+		}
 		str = str.replace(/\+/g, ' ');
 
 		try {
