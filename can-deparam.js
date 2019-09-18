@@ -41,8 +41,9 @@ var digitTest = /^\d+$/,
 	keyBreaker = /([^\[\]]+)|(\[\])/g,
 	paramTest = /([^?#]*)(#.*)?$/,
 	entityRegex = /%([^0-9a-f][0-9a-f]|[0-9a-f][^0-9a-f]|[^0-9a-f][^0-9a-f])/i,
+    startChars = {"#": true,"?": true},
 	prep = function (str) {
-		if (str.charAt(0) === "#" || str.charAt(0) === "?") {
+		if (startChars[str.charAt(0)] === true) {
 			str = str.substr(1, str.length);
 		}
 		str = str.replace(/\+/g, ' ');
