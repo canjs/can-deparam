@@ -44,7 +44,7 @@ var digitTest = /^\d+$/,
 	startChars = {"#": true,"?": true},
 	prep = function (str) {
 		if (startChars[str.charAt(0)] === true) {
-			str = str.substr(1, str.length);
+			str = str.substr(1);
 		}
 		str = str.replace(/\+/g, ' ');
 
